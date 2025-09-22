@@ -14,8 +14,6 @@ function App() {
             .then((res) => {
                 console.log(res.data);
                 setfruit(res.data)
-
-
             });
     }, []);
 

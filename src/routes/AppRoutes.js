@@ -4,17 +4,25 @@ import { Route, Routes } from "react-router-dom";
 
 import Home from './../pages/Home'
 import SignUp from './../pages/SignUp'
+import Login from './../pages/login'
+import Logout from './../pages/logout'
 import FruitOne from './../pages/FruitOne'
 import FruitList from './../pages/FruitList'
 import ElementList from './../pages/ElementList'
 import RandomElementList from './../pages/RandomElementList'
 
-function App() {
+
+function App({ user, handelLoginSuccess, logout }) {
+    // user 사용자 정보 객체
+    // handelLoginSuccess 로그인 성공시 동작할 액션
+
     return (
         <>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/member/signup' element={<SignUp />} />
+                <Route path='/member/login' element={<Login setUser={handelLoginSuccess} />} />
+                <Route path='/member/logout' element={<Logout setUser={logout} />} />
                 <Route path='/fruit' element={<FruitOne />} />
                 <Route path='/fruit/list' element={<FruitList />} />
                 <Route path='/eleList' element={<ElementList />} />

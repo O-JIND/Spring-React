@@ -34,7 +34,6 @@ function App() {
                 alert('Success');
                 navigate('member/login');
             }
-
         } catch (error) {
             if (error.response && error.response.data) {
                 setError(error.response.data);
@@ -71,7 +70,7 @@ function App() {
                                             value={name}
                                             onChange={(evt) => setName(evt.target.value)}
                                             isInvalid={!!error.name}
-                                            required
+
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {error.name}
@@ -85,7 +84,7 @@ function App() {
                                             value={email}
                                             onChange={(evt) => setEmail(evt.target.value)}
                                             isInvalid={!!error.email}
-                                            required
+
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {error.email}
@@ -99,7 +98,7 @@ function App() {
                                             value={password}
                                             onChange={(evt) => setPassword(evt.target.value)}
                                             isInvalid={!!error.password}
-                                            required
+
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {error.password}
@@ -113,7 +112,7 @@ function App() {
                                             value={address}
                                             onChange={(evt) => setAddress(evt.target.value)}
                                             isInvalid={!!error.address}
-                                            required
+
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {error.address}
