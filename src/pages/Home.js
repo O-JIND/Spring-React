@@ -12,56 +12,56 @@ function App() {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={`${API_BASE_URL}/images/Mac.jpg`}
-                        alt="MacNCheese"
+                        src={`${API_BASE_URL}/images/brioche_04_bigsize.png`}
+                        alt="brioche"
                     />
                     <Carousel.Caption>
-                        <h3>MacNCheese</h3>
-                        <p>부드러운 치즈 소스로 버무려 만든 요리</p>
+                        <h3>Brioche</h3>
+                        <p>브리오슈</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={`${API_BASE_URL}/images/Ragu.jpg`}
-                        alt="RaguPasta"
+                        src={`${API_BASE_URL}/images/croissant_03_bigsize.png`}
+                        alt="croissant"
                     />
                     <Carousel.Caption>
-                        <h3>RaguPasta</h3>
-                        <p>진한 미트 소스를 곁들인 파스타</p>
+                        <h3>Croissant</h3>
+                        <p>크로아상</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={`${API_BASE_URL}/images/Steak.jpg`}
-                        alt="Steak"
+                        src={`${API_BASE_URL}/images/french_baguette_01_bigsize.png`}
+                        alt="french baguette"
                     />
                     <Carousel.Caption>
-                        <h3>Steak</h3>
-                        <p>두툼하게 썬 쇠고기의 풍부한 육즙을 즐기는 요리</p>
+                        <h3>French Baguette</h3>
+                        <p>프렌치 바게트</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={`${API_BASE_URL}/images/sushi.jpg`}
-                        alt="Sushi"
+                        src={`${API_BASE_URL}/images/whitewine01_bigsize.png`}
+                        alt="whitewine"
                     />
                     <Carousel.Caption>
-                        <h3>Sushi</h3>
-                        <p>생선이나 해산물을 얹어 만드는 일본의 요리</p>
+                        <h3>White Wine</h3>
+                        <p>화이트 와인</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={`${API_BASE_URL}/images/tequila_sunrise.jpg`}
-                        alt="Tequila Sunrise"
+                        src={`${API_BASE_URL}/images/americano01_bigsize.png`}
+                        alt="Americano"
                     />
                     <Carousel.Caption>
-                        <h3>Tequila Sunrise</h3>
-                        <p>일출처럼 아름다운 색을 내는 달콤한 칵테일</p>
+                        <h3>Americano</h3>
+                        <p>아메리카노</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
