@@ -10,6 +10,7 @@ import FruitList from './../pages/FruitList'
 import ElementList from './../pages/ElementList'
 import RandomElementList from './../pages/RandomElementList'
 import Products from './../pages/Products'
+import ProductsInsert from './../pages/ProductInsert'
 
 
 function App({ user, handelLoginSuccess }) {
@@ -29,6 +30,8 @@ function App({ user, handelLoginSuccess }) {
 
 
                 <Route path='/products' element={<Products user={user} />} />
+                <Route path='/products/insert' element={<ProductsInsert user={user} />} />
+
 
             </Routes>
         </>

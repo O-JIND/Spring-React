@@ -12,8 +12,10 @@ function App({ appName, user, handelLogout }) {
             case 'ADMIN':
                 return (
                     <>
-                        <Nav.Link onClick={() => navigate(``)} >Register</Nav.Link>
+
+                        <Nav.Link onClick={() => navigate(`/products/insert`)}   >Register</Nav.Link>
                         <Nav.Link onClick={handelLogout} >Logout</Nav.Link>
+
 
                     </>
                 );
