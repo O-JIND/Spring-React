@@ -28,7 +28,6 @@ function App({ user }) {
         axios
             .get(url, {})
             .then((res) => {
-                console.log(res.data);
                 setProduct(res.data)
             })
             .catch((error) => {
@@ -47,7 +46,7 @@ function App({ user }) {
                     size="sm"
                     onClick={(evt) => {
                         evt.stopPropagation();
-                        alert('Modify')
+                        navigate(`/products/modify/${item.id}`)
                     }}>
                     Modify</Button >
                 &nbsp;
@@ -57,7 +56,6 @@ function App({ user }) {
                     size="sm"
                     onClick={async (evt) => {
                         evt.stopPropagation();
-
                         const isDelete = window.confirm(`If you really delete ${item.name}?`);
                         if (isDelete === false) {
                             alert(`Cancel`)

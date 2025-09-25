@@ -1,53 +1,71 @@
 import axios from "axios";
-import { useState } from "react";
-import { Alert, Button, Card, CardBody, Col, Container, Form, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Card, CardBody, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL } from "../config/config";
-import { useNavigate } from "react-router-dom";
+
+
+
 
 
 /*
-file upload is difference with Sign in
-
-step 1 
-Make Form
-ControlChange
-    각 컨트롤에 대한 change event function
-    input : name , price, stock, description
-    combo : category 
-FileSelect Function 
-    FileReader Api 사용 Base64로 인코딩 문자열로 변환
-    post 로 전송
-    input type="file"
-SubmitAction function
-    Control에 입력된 내용들을 BackEnd로 전송한다
-
-
-Test Cinario
-    in Image folder, "product_"+*** image is uploaded
-    in Database, Added 1Row
-    in Product page, 1page 1image is viewed
+과거 업로드 했던 이미지 삭제 ;
 */
 function App() {
-    const comment = "Product Register"
+    const { id } = useParams();
+    const comment = "Product Modify"
     const initial_value = {
-        name: '', price: '', category: '', stock: '', image: '', description: ''
+        id: id, name: '', price: '', category: '', stock: '', image: '', description: ''
     }; //상품 객체 정보
-
     const [product, setProduct] = useState(initial_value);
-
-
-
     const navigate = useNavigate();
+    useEffect(() => {
+        const url = `${API_BASE_URL}/products/Update/${id}`
+        axios
+            .get(url)
+            .then((res) => {
+                setProduct(res.data)
+            }).catch((error) => {
+                console.log(error);
+                alert('Product information loading Failure')
+            });
 
-    const ControlChange = (evt) => {
+    }, [id])
+
+
+
+    const ModifyAction = (evt) => {
         evt.preventDefault();
         const { name, value } = evt.target;
-        console.log(`control : ${name}, value : ${value} `);
-        //전개 연산자 사용 
         setProduct({ ...product, [name]: value });
     }
 
-    const FileSelect = (evt) => {
+    const SubmitAction = async (evt) => {
+        evt.preventDefault();
+        if (product.category === "-") {
+            alert("Please select the category")
+            return;
+        }
+        try {
+            const url = `${API_BASE_URL}/products/Update/${id}`;
+            const parameters = product;
+            const config = { headers: { 'Content-Type': 'application/json' } };
+            const response = await axios.put(url, parameters, config);
+            console.log(response.data);
+            alert("Modify success");
+            setProduct(initial_value);
+            navigate('/products');
+
+
+
+
+        } catch (error) {
+            console.log(error.response?.data);
+            console.log(error.response?.status);
+        }
+
+    }
+    const ImageEncoder = (evt) => {
         const { name, files } = evt.target;
         const file = files[0] //type="file"로 작정한 1번째 항목
 
@@ -62,36 +80,12 @@ function App() {
         };
     }
 
-    const SubmitAction = async (evt) => {
-        evt.preventDefault();
-        if (product.category === "-") {
-            alert("Please select the category")
-            return;
-        }
-        try {
-            const url = `${API_BASE_URL}/products/Update`;
-            const parameters = product;
-            const config = { headers: { 'Content-Type': 'application/json' } };
-
-            const response = await axios.post(url, parameters, config)
-            console.log(response.data);
-            alert('Register Success');
-            setProduct(initial_value);
-            navigate('/products');
-
-        } catch (error) {
-            console.log(error.response?.data); // 서버가 반환한 에러 메시지
-            console.log(error.response?.status); // 상태 코드
-        }
-
-    }
-
     return (
         <Container className="d-flex justify-content-center align-items-center" style={{ height: '70vh' }}>
             <Row className="w-100 justify-content-center">
                 <Col md={6}>
-                    <Card onSubmit={SubmitAction} >
-                        <CardBody>
+                    <Card onSubmit={SubmitAction}>
+                        <CardBody >
                             <h1>{comment}</h1>
                             <Form >
                                 <Form.Group className="mb-3">
@@ -101,7 +95,7 @@ function App() {
                                         placeholder="Please enter the name"
                                         name="name"
                                         value={product.name}
-                                        onChange={ControlChange}
+                                        onChange={ModifyAction}
                                     >
                                     </Form.Control>
 
@@ -113,7 +107,7 @@ function App() {
                                         placeholder="Please enter the price"
                                         name="price"
                                         value={product.price}
-                                        onChange={ControlChange}
+                                        onChange={ModifyAction}
                                     >
                                     </Form.Control>
 
@@ -124,7 +118,7 @@ function App() {
                                         type="text"
                                         name="category"
                                         value={product.category}
-                                        onChange={ControlChange}
+                                        onChange={ModifyAction}
                                         required
                                     >
                                         {/* JAVA의 Enum 타입은 모두 대문자 사용 */}
@@ -144,7 +138,7 @@ function App() {
                                         placeholder="Please enter the stock"
                                         name="stock"
                                         value={product.stock}
-                                        onChange={ControlChange}
+                                        onChange={ModifyAction}
                                     >
                                     </Form.Control>
                                 </Form.Group>
@@ -155,7 +149,7 @@ function App() {
                                     <Form.Control
                                         type="file"
                                         name="image"
-                                        onChange={FileSelect}
+                                        onChange={ImageEncoder}
                                     >
                                     </Form.Control>
 
@@ -167,7 +161,7 @@ function App() {
                                         placeholder="Please enter the description"
                                         name="description"
                                         value={product.description}
-                                        onChange={ControlChange}
+                                        onChange={ModifyAction}
                                     >
                                     </Form.Control>
                                     <br />

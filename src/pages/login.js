@@ -25,7 +25,6 @@ function App({ setUser }) {
 
             if (message === 'success') { //in java map.put('message','success')
                 //성공시 정보 저장 성공 후 홈 페이지로 이동
-                console.log(member);
                 setUser(member);
                 navigate(`/`)
 

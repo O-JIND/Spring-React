@@ -32,7 +32,7 @@ function App() {
 
             if (response.status === 200) {/* Spring MemberController 참조 */
                 alert('Success');
-                navigate('member/login');
+                navigate('/member/login');
             }
         } catch (error) {
             if (error.response && error.response.data) {

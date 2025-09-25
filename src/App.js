@@ -20,7 +20,6 @@ function App() {
     //login.js에서 반환 받은 정보
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
-    console.log('success');
   }
 
   const handelLogout = (evt) => {
