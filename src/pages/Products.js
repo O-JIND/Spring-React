@@ -24,7 +24,6 @@ function App({ user }) {
 
     useEffect(() => {
         const url = `${API_BASE_URL}/products/list`
-
         axios
             .get(url, {})
             .then((res) => {
@@ -40,40 +39,42 @@ function App({ user }) {
         }
         return (
             <div className="d-flex justify-content-center">
-                <Button
-                    variant="warning"
-                    className="mb-2"
-                    size="sm"
-                    onClick={(evt) => {
-                        evt.stopPropagation();
-                        navigate(`/products/modify/${item.id}`)
-                    }}>
-                    Modify</Button >
-                &nbsp;
-                <Button
-                    variant="danger"
-                    className="mb-2"
-                    size="sm"
-                    onClick={async (evt) => {
-                        evt.stopPropagation();
-                        const isDelete = window.confirm(`If you really delete ${item.name}?`);
-                        if (isDelete === false) {
-                            alert(`Cancel`)
-                            return;
-                        }
+                <Col>
+                    <Button
+                        variant="warning"
+                        className="mb-2"
+                        size="sm"
+                        onClick={(evt) => {
+                            evt.stopPropagation();
+                            navigate(`/products/modify/${item.id}`)
+                        }}>
+                        Modify</Button >
+                    &nbsp;
+                    <Button
+                        variant="danger"
+                        className="mb-2"
+                        size="sm"
+                        onClick={async (evt) => {
+                            evt.stopPropagation();
+                            const isDelete = window.confirm(`If you really delete ${item.name}?`);
+                            if (isDelete === false) {
+                                alert(`Cancel`)
+                                return;
+                            }
 
-                        try {// 상품을 삭제 후 다시 상품 목록 페이지를 보여줌.
-                            await axios.delete(`${API_BASE_URL}/products/delete/${item.id}`)
-                            navigate(`/products`);
-                            alert(`${item.name} is deleted `);
-                            setProduct(prev => prev.filter(p => p.id !== item.id))//reRendering
+                            try {// 상품을 삭제 후 다시 상품 목록 페이지를 보여줌.
+                                await axios.delete(`${API_BASE_URL}/products/delete/${item.id}`)
+                                navigate(`/products`);
+                                alert(`${item.name} is deleted `);
+                                setProduct(prev => prev.filter(p => p.id !== item.id))//reRendering
 
-                        } catch (error) {
-                            console.log(error);
-                            alert(`Fail to delete : ${error.response?.data || error.message}`)
-                        }
-                    }}>
-                    Delete</Button>
+                            } catch (error) {
+                                console.log(error);
+                                alert(`Fail to delete : ${error.response?.data || error.message}`)
+                            }
+                        }}>
+                        Delete</Button>
+                </Col>
             </div>
         );
 
@@ -93,7 +94,6 @@ function App({ user }) {
             {/* Field search Area */}
 
 
-
             {/* Content Area */}
             <Row>
                 {products.map((item) => (
@@ -104,6 +104,10 @@ function App({ user }) {
                                 src={`${API_BASE_URL}/images/${item.image}`}
                                 alt={item.name}
                                 style={{ width: '100%', height: '200px' }}
+                                onClick={(evt) => {
+                                    evt.stopPropagation();
+                                    navigate(`/products/specific/${item.id}`)
+                                }}
                             />
                             <Card.Body >
                                 {/* borderCollapse collapse : table element 간 서로 붙여 준다. 기본값 .. seperate 는 서로 띄워준다. */}

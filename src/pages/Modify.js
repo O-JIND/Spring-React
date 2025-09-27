@@ -55,10 +55,6 @@ function App() {
             alert("Modify success");
             setProduct(initial_value);
             navigate('/products');
-
-
-
-
         } catch (error) {
             console.log(error.response?.data);
             console.log(error.response?.status);
@@ -67,11 +63,14 @@ function App() {
     }
     const ImageEncoder = (evt) => {
         const { name, files } = evt.target;
+
+
         const file = files[0] //type="file"로 작정한 1번째 항목
 
         //FileReader: 웹 브라우저에서 제공해주는 내장 객체, 파일 읽기에 사용가능하다.
         const reader = new FileReader;
         //readAsDataURL file 을 문자열 형태(Base64 인코딩)로 반환 
+        if (!file) { return }
         reader.readAsDataURL(file);
         //onloadend: 읽기 작업이 성공하면 자동으로 동작하는 이벤트 핸들러 함수; Callback function
         reader.onloadend = () => {

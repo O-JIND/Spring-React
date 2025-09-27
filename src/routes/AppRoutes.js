@@ -12,6 +12,8 @@ import RandomElementList from './../pages/RandomElementList'
 import Products from './../pages/Products'
 import ProductsInsert from './../pages/ProductInsert'
 import ProductsModify from '../pages/Modify'
+import SpecificPage from '../pages/Specific'
+import CartPage from '../pages/Cart'
 
 
 function App({ user, handelLoginSuccess }) {
@@ -31,8 +33,10 @@ function App({ user, handelLoginSuccess }) {
 
 
                 <Route path='/products' element={<Products user={user} />} />
-                <Route path='/products/insert' element={<ProductsInsert user={user} />} />
-                <Route path='/products/modify/:id' element={<ProductsModify user={user} />} />
+                <Route path='/products/insert' element={<ProductsInsert />} />
+                <Route path='/products/modify/:id' element={<ProductsModify />} />
+                <Route path='/products/specific/:id' element={<SpecificPage user={user} />} />
+                <Route path='/Cart' element={<CartPage user={user} />} />
 
 
             </Routes>
