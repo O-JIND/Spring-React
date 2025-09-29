@@ -22,7 +22,7 @@ function App({ appName, user, handelLogout }) {
             case 'USER':
                 return (
                     <>
-                        <Nav.Link onClick={() => navigate(`/Cart`)} >Wishcart</Nav.Link>
+                        <Nav.Link onClick={() => navigate(`/Cart`)} >Cart</Nav.Link>
                         <Nav.Link onClick={() => navigate(``)} >Orderlist</Nav.Link>
                         <Nav.Link onClick={handelLogout} >Logout</Nav.Link>
                     </>

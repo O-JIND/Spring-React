@@ -35,7 +35,7 @@ function App({ user }) {
     }, []);
     const makeAdminButtons = (item, user, navigate) => {
         if (user?.role !== 'ADMIN') {
-
+            return;
         }
         return (
             <div className="d-flex justify-content-center">
