@@ -10,7 +10,6 @@ function App({ user }) {
     const thStyle = { fontSize: '1.2rem' };
     // 보여주고자 하는 카트 상품 배열 정보 
     const [cart, setCart] = useState([]);
-    const [order, setOrder] = useState([]);
     const [pricetotal, setPriceTotal] = useState(0);
     const navigate = useNavigate();
     // ?. Optional Chaining 물음표를 적어주면 오류가 발생하지 않고 undefined를 반환
@@ -121,9 +120,68 @@ function App({ user }) {
         })
     };
 
-    const OrderCartProduct = () => {
-        //state를 Order page로 전송
-        return null;
+    const DelteCartProduct = async (cartProductId) => {
+        {
+
+            const confirm = window.confirm("Delete from Cart?")
+            if (confirm) {
+                try {
+                    await axios.delete(`${API_BASE_URL}/cart/delete/${cartProductId}`)
+                    navigate('/Cart')
+                    alert(`Remove Success`)
+                    setCart((prev) => {
+                        const updatedProducts = prev.filter((p => p.cartProductId !== cartProductId))//reRendering
+                        refresgOrderTotalPrice(updatedProducts)
+                        return updatedProducts;
+                    })
+
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                alert("Cancel");
+
+            }
+        }
+    }
+
+    const OrderCartProduct = async () => {
+        const filtereddata = cart.filter((prev) =>
+            prev.checked == true
+        );
+        if (filtereddata.length === 0) {
+            alert("Select order product")
+            return;
+        }
+
+        // Spring boot 의 orderDto, orderproductDto 클래스와 연관이 있음
+        // 주의 > paraeters 작성시 ket의 이름은 Order
+        try {
+            const url = `${API_BASE_URL}/Order`
+            const parameter = {
+                memberId: user.id,
+                status: 'PENDING',
+                orderItems: filtereddata.map((product) => ({
+                    cartProductId: product.cartProductId,
+                    productId: product.productId,
+                    quantity: product.quantity
+                }))
+            };
+
+            const response = await axios.post(url, parameter)
+            console.log(response);
+
+            //주문 한내역 삭제 및 총 금액 초기화 
+            setCart((prev) =>
+                prev.filter((product) => !product.checked)
+            );
+            setPriceTotal(0);
+            // navigate("/Orders")
+
+        } catch (error) {
+            console.log(error);
+
+        }
     };
 
     return (
@@ -198,24 +256,7 @@ function App({ user }) {
                                                 <Button
                                                     variant="danger"
                                                     size="sm"
-                                                    onClick={async (evt,) => {
-                                                        evt.stopPropagation();
-
-                                                        const confirm = window.confirm("Delete from Cart?")
-                                                        if (confirm) {
-                                                            try {
-                                                                await axios.delete(`${API_BASE_URL}/cart/delete/${item.cartProductId}`)
-                                                                navigate('/Cart')
-                                                                alert(`${item.name} is Removed`)
-                                                                setCart(prev => prev.filter(p => p.cartProductId !== item.cartProductId))//reRendering
-                                                            } catch (error) {
-                                                                console.log(error);
-                                                            }
-                                                        } else {
-                                                            alert("Cancel");
-
-                                                        }
-                                                    }}
+                                                    onClick={() => DelteCartProduct(item.cartProductId)}
                                                 >
                                                     Del
                                                 </Button>
@@ -224,7 +265,7 @@ function App({ user }) {
                                     )
                                 ) : (
                                     <tr>
-                                        <td>
+                                        <td colSpan={5} >
                                             장바구니가 비어있습니다.
                                         </td>
                                     </tr>
@@ -237,6 +278,17 @@ function App({ user }) {
                 <div className="text-end" >
                     <Button
                         variant="primary" size="lg" onClick={OrderCartProduct}>
+                        {/* 
+                            1. Cart 문으로 props 전송 
+                            2. Repo및 Con/Ser 생성 
+                            3. Spring 에 DTO 생성 후 Repo에 저장 
+                            4. 저장 후 Order 페이지로 이동 후 Repo 값 불러오기
+                            
+
+
+
+
+                             */}
                         Order
                     </Button>
                 </div>

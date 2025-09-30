@@ -63,6 +63,9 @@ function App({ user }) {
     }
 
     const addToCart = async () => {
+        console.log(user.id);
+
+
         if (quantity < 1) {
             return alert(`구매 수량은 1개 이상이어야 합니다.`)
         }
@@ -85,6 +88,36 @@ function App({ user }) {
     }
 
 
+    const BuyOne = async () => {
+        if (quantity < 1) {
+            alert("수량은 한개 이상 선택해야합니다.")
+            return;
+        }
+
+        try {
+            const url = `${API_BASE_URL}/Order`
+            const parameter = {
+                memberId: user.id,
+                status: 'PENDING',
+                orderItems: [{
+                    productId: product.id,
+                    quantity: product.quantity
+                }]
+            };
+
+            const response = await axios.post(url, parameter)
+            console.log(response);
+            alert(`${product.name} ${quantity}개 주문하였습니다.`)
+
+            navigate("/products")
+
+        } catch (error) {
+            console.log(error);
+
+        }
+
+
+    }
 
     return (
         <Container className="my-4">
@@ -175,7 +208,7 @@ function App({ user }) {
                                     Back
                                 </Button>
 
-                                <Button className="mx-2" style={{ width: '100px' }}
+                                <Button className="me-4 px-4"
                                     onClick={() => {
                                         if (!user) {
                                             alert('You should login')
@@ -187,7 +220,15 @@ function App({ user }) {
                                     } >
                                     Cart
                                 </Button>
-                                <Button className="mx-2" style={{ width: '100px' }} onClick={() => navigate()} >
+                                <Button className="me-2 px-4" onClick={() => {
+                                    if (!user) {
+                                        alert('You should login')
+                                        return navigate("/products")
+                                    } else {
+                                        BuyOne();
+                                    }
+                                }
+                                } >
                                     Purchase
                                 </Button>
 

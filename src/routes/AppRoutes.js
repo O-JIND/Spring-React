@@ -14,6 +14,8 @@ import ProductsInsert from './../pages/ProductInsert'
 import ProductsModify from '../pages/Modify'
 import SpecificPage from '../pages/Specific'
 import CartPage from '../pages/Cart'
+import OrderPage from '../pages/Orders'
+import OrderSPPage from '../pages/OrderListSpecifics'
 
 
 function App({ user, handelLoginSuccess }) {
@@ -37,6 +39,8 @@ function App({ user, handelLoginSuccess }) {
                 <Route path='/products/modify/:id' element={<ProductsModify />} />
                 <Route path='/products/specific/:id' element={<SpecificPage user={user} />} />
                 <Route path='/Cart' element={<CartPage user={user} />} />
+                <Route path='/Orders' element={<OrderPage user={user} />} />
+                <Route path='/Orders/specific/:id' element={<OrderSPPage user={user} />} />
 
 
             </Routes>

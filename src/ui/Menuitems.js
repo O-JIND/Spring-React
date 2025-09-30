@@ -23,7 +23,7 @@ function App({ appName, user, handelLogout }) {
                 return (
                     <>
                         <Nav.Link onClick={() => navigate(`/Cart`)} >Cart</Nav.Link>
-                        <Nav.Link onClick={() => navigate(``)} >Orderlist</Nav.Link>
+                        <Nav.Link onClick={() => navigate(`/Orders`)} >Orderlist</Nav.Link>
                         <Nav.Link onClick={handelLogout} >Logout</Nav.Link>
                     </>
                 );
