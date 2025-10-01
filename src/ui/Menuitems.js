@@ -13,7 +13,8 @@ function App({ appName, user, handelLogout }) {
                 return (
                     <>
 
-                        <Nav.Link onClick={() => navigate(`/products/insert`)}   >Register</Nav.Link>
+                        <Nav.Link onClick={() => navigate(`/products/insert`)} >Register</Nav.Link>
+                        <Nav.Link onClick={() => navigate(`/Orders/list`)} >Orderlist</Nav.Link>
                         <Nav.Link onClick={handelLogout} >Logout</Nav.Link>
 
 
@@ -23,7 +24,7 @@ function App({ appName, user, handelLogout }) {
                 return (
                     <>
                         <Nav.Link onClick={() => navigate(`/Cart`)} >Cart</Nav.Link>
-                        <Nav.Link onClick={() => navigate(`/Orders`)} >Orderlist</Nav.Link>
+                        <Nav.Link onClick={() => navigate(`/Orders/list`)} >Orderlist</Nav.Link>
                         <Nav.Link onClick={handelLogout} >Logout</Nav.Link>
                     </>
                 );
@@ -43,6 +44,7 @@ function App({ appName, user, handelLogout }) {
         <><Navbar bg="dark" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand href='/'>{appName}</Navbar.Brand>
+                <Navbar.Brand  >   Hi, {user?.name}</Navbar.Brand>
                 <Nav className='me-auto'>
                     <Nav.Link onClick={() => navigate(`/products`)}>Product</Nav.Link>
                     {/* user에 따른 분기된 메뉴를 rendering */}

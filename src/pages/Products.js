@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Dropdown, Form, Row } from "react-bootstrap";
 import { API_BASE_URL } from "../config/config";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -92,7 +92,17 @@ function App({ user }) {
                 )}
             </Link>
             {/* Field search Area */}
+            <Form.Group >
+                <Form.Select>
 
+                </Form.Select>
+                <Form.Select>
+
+                </Form.Select>
+                <Form.Select>
+
+                </Form.Select>
+            </Form.Group>
 
             {/* Content Area */}
             <Row>
