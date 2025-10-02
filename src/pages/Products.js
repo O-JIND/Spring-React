@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Dropdown, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Dropdown, Form, InputGroup, Row } from "react-bootstrap";
 import { API_BASE_URL } from "../config/config";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -92,18 +92,38 @@ function App({ user }) {
                 )}
             </Link>
             {/* Field search Area */}
-            <Form.Group >
-                <Form.Select>
+            <Row>
 
-                </Form.Select>
-                <Form.Select>
-
-                </Form.Select>
-                <Form.Select>
-
-                </Form.Select>
-            </Form.Group>
-
+                <Col md={2}>
+                    <Form.Select >
+                        <option >전체기간</option>
+                        <option >최신순</option>
+                        <option >오래된순</option>
+                    </Form.Select>
+                </Col>
+                <Col md={2}>
+                    <Form.Select>
+                        <option>카테고리</option>
+                        <option>BREAD</option>
+                        <option>BEVERAGE</option>
+                        <option>CAKE</option>
+                    </Form.Select>
+                </Col>
+                <Col md={2}>
+                    <Form.Select>
+                        <option>정렬</option>
+                        <option>ASC</option>
+                        <option>DESC</option>
+                    </Form.Select>
+                </Col>
+                <Col md={6}>
+                    <InputGroup>
+                        <Form.Control />
+                        <Button >Search</Button>
+                    </InputGroup>
+                </Col>
+            </Row>
+            <br />
             {/* Content Area */}
             <Row>
 
@@ -152,7 +172,7 @@ function App({ user }) {
             {/* Paging Area */}
 
 
-        </Container>
+        </Container >
     )
 }
 export default App;

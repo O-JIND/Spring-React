@@ -101,9 +101,10 @@ function App({ user }) {
                 status: 'PENDING',
                 orderItems: [{
                     productId: product.id,
-                    quantity: product.quantity
+                    quantity: quantity
                 }]
             };
+            console.log([parameter]);
 
             const response = await axios.post(url, parameter)
             console.log(response);
@@ -212,7 +213,7 @@ function App({ user }) {
                                     onClick={() => {
                                         if (!user) {
                                             alert('You should login')
-                                            return navigate("/products/Cart")
+                                            return navigate("/products")
                                         } else {
                                             addToCart();
                                         }
